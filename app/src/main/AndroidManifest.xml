@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -59,12 +60,30 @@
             android:label="@string/title_activity_phonecallbased" >
         </activity>
         <activity
-            android:name=".SetReminder"
+            android:name=".SetWifiReminder"
             android:label="@string/title_activity_set_reminder" >
         </activity>
         <activity
             android:name=".NotificationView"
             android:label="@string/title_activity_notification_view" >
+        </activity>
+
+        <receiver
+            android:name=".PhoneCallReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".DisplayWifiReminders"
+            android:label="@string/title_activity_display_wifi_reminders" >
+        </activity>
+        <activity
+            android:name=".EditWifiReminder"
+            android:label="@string/title_activity_edit_wifi_reminder" >
         </activity>
     </application>
 

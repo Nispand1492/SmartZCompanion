@@ -26,7 +26,7 @@ public class WifiMenu extends ActionBarActivity {
         bSetRem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WifiMenu.this,SetReminder.class);
+                Intent intent = new Intent(WifiMenu.this,SetWifiReminder.class);
                 startActivity(intent);
             }
         });
@@ -56,7 +56,14 @@ public class WifiMenu extends ActionBarActivity {
             }
         });
 
-
+        Button bEdit = (Button) findViewById(R.id.editBtn);
+        bEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WifiMenu.this,DisplayWifiReminders.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void setDisplay(String toastNotif)

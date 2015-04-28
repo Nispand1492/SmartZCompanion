@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 
 import static android.widget.Toast.LENGTH_LONG;
 
-public class SetReminder extends ActionBarActivity {
+public class SetWifiReminder extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +75,8 @@ public class SetReminder extends ActionBarActivity {
     }
     public void setDisplay(String toastNotif)
     {
-        Toast.makeText(SetReminder.this, toastNotif, LENGTH_LONG).show();
-        Intent intent = new Intent(SetReminder.this,MainActivity.class);
+        Toast.makeText(SetWifiReminder.this, toastNotif, LENGTH_LONG).show();
+        Intent intent = new Intent(SetWifiReminder.this,MainActivity.class);
         startActivity(intent);
     }
 }

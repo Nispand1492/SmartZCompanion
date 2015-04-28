@@ -14,4 +14,6 @@
     <string name="Description">Enter the Descriptions of Reminder</string>
     <string name="title_activity_set_reminder">SetReminder</string>
     <string name="title_activity_notification_view">NotificationView</string>
+    <string name="title_activity_display_wifi_reminders">DisplayWifiReminders</string>
+    <string name="title_activity_edit_wifi_reminder">EditWifiReminder</string>
 </resources>
