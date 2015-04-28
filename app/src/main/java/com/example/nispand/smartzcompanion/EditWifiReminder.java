@@ -40,8 +40,8 @@ public class EditWifiReminder extends ActionBarActivity {
                 String sUquery ="Update SCDB SET Eventnote ='"+mTV.getText().toString()+"' WHERE EventID = '"+sEventID+"';";
                 db.execSQL(sUquery);
 
-//                sUquery = "Update SCDB SET ReminderSet =1 Where EventID= "+sEventID;
-//                db.execSQL(sUquery);
+                sUquery = "Update SCDB SET ReminderSet =1 Where EventID= '"+sEventID+"'";
+                db.execSQL(sUquery);
 
                setDisplay("Reminder Saved and switched on");
             }
