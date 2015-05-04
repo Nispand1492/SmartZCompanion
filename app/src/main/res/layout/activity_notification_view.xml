@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:orientation="vertical"
-    tools:context="com.example.nispand.smartzcompanion.NotificationView" tools:deviceIds="wear">
-    <TextView android:id="@+id/text" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:text="" />
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ff219bff"
+    android:orientation="vertical"
+    tools:context="com.example.nispand.smartzcompanion.NotificationView"
+    tools:deviceIds="wear">
 
-    <Button
+    <TextView
+        android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Switch off reminder"
+        android:text="" />
+
+    <Button
         android:id="@+id/switchOff"
-        android:layout_gravity="center_horizontal" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Switch off reminder" />
 </LinearLayout>

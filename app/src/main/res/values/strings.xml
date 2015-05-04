@@ -16,4 +16,8 @@
     <string name="title_activity_notification_view">NotificationView</string>
     <string name="title_activity_display_wifi_reminders">DisplayWifiReminders</string>
     <string name="title_activity_edit_wifi_reminder">EditWifiReminder</string>
+    <string name="title_activity_add__phone_call_reminder">Add_PhoneCallReminder</string>
+    <string name="title_activity_edit_phonecallbased">Edit_phonecallbased</string>
+    <string name="title_activity_edit_event_phone_call_based">EditEventPhoneCallBased</string>
+    <string name="title_activity_delete_phone_event">DeletePhoneEvent</string>
 </resources>

@@ -1,6 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/editWifi"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ff219bff"
@@ -8,47 +7,44 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.nispand.smartzcompanion.EditWifiReminder">
+    tools:context="com.example.nispand.smartzcompanion.EditEventPhoneCallBased">
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editText10"
         android:layout_width="wrap_content"
-        android:layout_height="140dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="111dp"
+        android:background="#ffffffff"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Atul" />
+
+    <EditText
+        android:id="@+id/editText11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/editText10"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/editText10"
+        android:layout_below="@+id/editText10"
+        android:layout_marginTop="62dp"
+        android:autoText="false"
+        android:background="#ffffffff"
+        android:ems="10"
         android:inputType="textMultiLine"
-        android:scrollbars="vertical"
-        android:selectAllOnFocus="true"
-        android:text="Reminder Note" />
+        android:text="Talk About Project" />
 
     <Button
-        android:id="@+id/btnSave"
+        android:id="@+id/button8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="Save and turn on Reminder"
-        />
-
-    <Button
-        android:id="@+id/btnDel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnSave"
-        android:layout_centerHorizontal="true"
-        android:text="Delete Reminder" />
-
-    <Button
-        android:id="@+id/btnSwitchOff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnDel"
-        android:layout_centerHorizontal="true"
-        android:text="Turn off reminder" />
-
-
+        android:layout_marginBottom="107dp"
+        android:text="SAVE" />
 </RelativeLayout>

@@ -16,44 +16,52 @@
         android:layout_height="fill_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/hello_world"
+        android:text="SMART COMPANION"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#ff19ff14"
+        android:textColor="#fff7f2ff"
         android:textColorHighlight="@color/background_floating_material_dark"
         android:textSize="30dp"
         android:theme="@style/Base.TextAppearance.AppCompat.Title.Inverse"
         android:transitionName="@string/abc_action_bar_home_subtitle_description_format" />
 
-    <LinearLayout
-        android:id="@+id/R"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+    <Button
+        android:id="@+id/button"
+        android:layout_width="86dp"
+        android:layout_height="100dp"
+        android:layout_above="@+id/button2"
+        android:layout_alignEnd="@+id/textView"
         android:layout_alignLeft="@+id/textView"
+        android:layout_alignRight="@+id/textView"
         android:layout_alignStart="@+id/textView"
-        android:orientation="horizontal"
-        android:weightSum="1">
+        android:layout_gravity="center_vertical"
+        android:text="Calendar Based"
+        android:typeface="serif" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="86dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center_vertical"
-            android:text="CalendarBased" />
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="86dp"
+        android:layout_height="98dp"
+        android:layout_alignEnd="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"
+        android:layout_alignRight="@+id/textView"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:text="Wi-Fi Based"
+        android:typeface="serif" />
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="86dp"
-            android:layout_height="98dp"
-            android:layout_gravity="center_vertical"
-            android:text="Wi-Fi Based" />
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="72dp"
-            android:layout_height="96dp"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0.41"
-            android:text="PhoneCallBased" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="72dp"
+        android:layout_height="96dp"
+        android:layout_alignEnd="@+id/textView"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignStart="@+id/textView"
+        android:layout_below="@+id/button2"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0.41"
+        android:text="Phone Call Based"
+        android:typeface="serif" />
 
 </RelativeLayout>

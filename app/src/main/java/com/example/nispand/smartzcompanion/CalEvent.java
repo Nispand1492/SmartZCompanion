@@ -35,7 +35,7 @@ public class CalEvent extends ActionBarActivity {
     TextView tx;
     LinearLayout ll;
     ListView lv;
-    Button Add, Search ,Delete;
+    Button Add, Search;
     long cday;
     long cmonth;
     long cyear;
@@ -47,7 +47,6 @@ public class CalEvent extends ActionBarActivity {
         setContentView(R.layout.activity_cal_event);
         Add = (Button) findViewById(R.id.Add);
         Search = (Button) findViewById(R.id.Search);
-        Delete = (Button)findViewById(R.id.Delete);
         calendar = (CalendarView) findViewById(R.id.calendarView2);
         //  lv = (ListView) findViewById(R.id.listView);
         List<String> li;
@@ -72,14 +71,7 @@ public class CalEvent extends ActionBarActivity {
                 search_event();
             }
         });
-        Delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calendar.setVisibility(View.VISIBLE);
-                initializeCalendar();
-                delete();
-            }
-        });
+
     }
     public void initializeCalendar() {
 
@@ -187,13 +179,13 @@ public class CalEvent extends ActionBarActivity {
                 String id1;
                 String nameid;
                 List<String> li = new ArrayList<String>();
-                ;
+
                 ListView list;
                 ArrayAdapter<String> adp = new ArrayAdapter<String>
                         (getBaseContext(), R.layout.list, li);
                 // Iterate over the result Cursor.
                 while (cursor.moveToNext()) {
-                    long eventid =0;
+                    long eventid = 0;
                     list = (ListView) findViewById(R.id.myList);
                     list.setVisibility(View.VISIBLE);
                     Date d1 = new Date(cursor.getLong(D1));
@@ -242,22 +234,8 @@ public class CalEvent extends ActionBarActivity {
 
         });
     }
-    public void delete() {
 
-        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            //show the selected date as a toast
-            public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
-                Toast.makeText(getApplicationContext(), day + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
-                long date1 = calendar.getDate();
-                Date d2 = new Date(date1);
-                String[] selArgs = new String[]{String.valueOf(d2)};
-                // Get a Cursor over the Events Provider.
-                ContentResolver cursor = getContentResolver();
-                cursor.delete(CalendarContract.CONTENT_URI, CalendarContract.Reminders.DTSTART + "=?", selArgs);
-            }
-        });
-    }
-        public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) {
                 // Inflate the menu; this adds items to the action bar if it is present.
                 getMenuInflater().inflate(R.menu.menu_cal_event, menu);
                 return true;
