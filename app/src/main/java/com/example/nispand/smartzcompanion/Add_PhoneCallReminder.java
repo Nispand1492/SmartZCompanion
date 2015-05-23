@@ -71,7 +71,7 @@ public class Add_PhoneCallReminder extends ActionBarActivity implements AdapterV
     private void savePhone (final AutoCompleteTextView toNumber) {
                 String NameSel = "";
                 NameSel = toNumber.getText().toString();
-
+                String message = String.valueOf(contactmessgae.getText());
 
                 final String ToNumber = toNumberValue;
 
@@ -91,8 +91,9 @@ public class Add_PhoneCallReminder extends ActionBarActivity implements AdapterV
         SimpleDateFormat fcdate =new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z");
         java.util.Date date= new java.util.Date();
         String sEventID = fdate.format(date);
+
         String sEventDate =fcdate.format(date);
-        String sIquery = "Insert Into SCDB VALUES('"+sEventID+"', '"+NameSel+"', '"+sEventDate+"',1,'"+NameSel+"');";
+        String sIquery = "Insert Into SCDB VALUES('"+sEventID+"', '"+message+"', '"+NameSel+"', '"+sEventDate+"',1,'"+ToNumber+"');";
         db.execSQL(sIquery);
         db.close();
         setDisplay("REMINDER IS SET!!");
