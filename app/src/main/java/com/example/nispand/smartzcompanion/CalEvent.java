@@ -1,14 +1,15 @@
 package com.example.nispand.smartzcompanion;
 
+import android.app.DatePickerDialog;
 import android.content.ContentResolver;
 import android.content.ContentUris;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.v7.app.ActionBarActivity;
+import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,12 +17,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -36,10 +41,12 @@ public class CalEvent extends ActionBarActivity {
     LinearLayout ll;
     ListView lv;
     Button Add, Search;
+    EditText selectdate;
     long cday;
     long cmonth;
     long cyear;
     long xyz;
+    Date myDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +55,8 @@ public class CalEvent extends ActionBarActivity {
         Add = (Button) findViewById(R.id.Add);
         Search = (Button) findViewById(R.id.Search);
         calendar = (CalendarView) findViewById(R.id.calendarView2);
+        selectdate = (EditText) findViewById(R.id.selectdate);
+
         //  lv = (ListView) findViewById(R.id.listView);
         List<String> li;
         li = new ArrayList<String>();
@@ -58,17 +67,52 @@ public class CalEvent extends ActionBarActivity {
         Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calendar.setVisibility(View.VISIBLE);
-                initializeCalendar();
-                add_event();
+                SimpleDateFormat Formatter = new SimpleDateFormat("MM/dd/yyyy");
+                try {
+                    myDate    = Formatter.parse(String.valueOf(selectdate.getText()));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                add_event(myDate);
             }
         });
         Search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calendar.setVisibility(View.VISIBLE);
-                initializeCalendar();
+                SimpleDateFormat Formatter = new SimpleDateFormat("MM/dd/yyyy");
+                try {
+                    myDate    = Formatter.parse(String.valueOf(selectdate.getText()));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 search_event();
+            }
+        });
+        final Calendar myCalendar = Calendar.getInstance();
+        // Calendar myCalendar = Calendar.getInstance();
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                selectdate.setText(monthOfYear+"/"+dayOfMonth+"/"+year);
+            }
+
+        };
+
+
+        selectdate.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(CalEvent.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
@@ -96,33 +140,14 @@ public class CalEvent extends ActionBarActivity {
 
 
     }
-
-    public void on_create() {
-        Uri calUri = CalendarContract.Calendars.CONTENT_URI;
-        ContentValues cv = new ContentValues();
-        cv.put(CalendarContract.Calendars.ACCOUNT_NAME, "Chetan Kabra");
-        cv.put(CalendarContract.Calendars.ACCOUNT_TYPE, CalendarContract.ACCOUNT_TYPE_LOCAL);
-        cv.put(CalendarContract.Calendars.NAME, "CK");
-        cv.put(CalendarContract.Calendars.CALENDAR_DISPLAY_NAME, "CK Calendar");
-        cv.put(CalendarContract.Calendars.CALENDAR_ACCESS_LEVEL, CalendarContract.Calendars.CAL_ACCESS_OWNER);
-        cv.put(CalendarContract.Calendars.OWNER_ACCOUNT, true);
-        cv.put(CalendarContract.Calendars.VISIBLE, 1);
-        cv.put(CalendarContract.Calendars.SYNC_EVENTS, 1);
-
-        calUri = calUri.buildUpon()
-                .appendQueryParameter(CalendarContract.CALLER_IS_SYNCADAPTER, "true")
-                .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_NAME, "Chetan Kabra")
-                .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_TYPE, CalendarContract.ACCOUNT_TYPE_LOCAL)
-                .build();
-        Uri result = this.getContentResolver().insert(calUri, cv);
-    }
-    public void add_event()
+    public void add_event(Date myDate)
     {
-
-        //sets the listener to be notified upon selected date change
-        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            //show the selected date as a toast
-            public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
+                String month = (String) DateFormat.format("MM", myDate);
+                String day = (String) android.text.format.DateFormat.format("dd", myDate);
+                String year = (String) android.text.format.DateFormat.format("yyyy", myDate);
+                int setm = Integer.parseInt(month);
+                int setday = Integer.parseInt(day);
+                int sety =Integer.parseInt(year);
                 Toast.makeText(getApplicationContext(), day + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
                 Calendar cal = Calendar.getInstance();
                 Intent intent = new Intent(Intent.ACTION_INSERT);
@@ -132,29 +157,35 @@ public class CalEvent extends ActionBarActivity {
                 intent.putExtra("Rule", "FREQ=YEARLY");
                 intent.putExtra("endTime", cal.getTimeInMillis() + 60 * 60 * 1000);
                 intent.putExtra("Title", "Put Title ");
-                GregorianCalendar calDate = new GregorianCalendar(year, month, day);
+                GregorianCalendar calDate = new GregorianCalendar(sety,setm,setday);
                 intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);
                 intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, calDate.getTimeInMillis());
+                intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,calDate.getTimeInMillis());
                 startActivity(intent);
-            }
-        });
     }
     public void search_event(){
 
 
 
-        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+        //calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             //show the selected date as a toast
-            public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
+            //public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
+                String month = (String) DateFormat.format("MM", myDate);
+                String day = (String) android.text.format.DateFormat.format("dd", myDate);
+                String year = (String) android.text.format.DateFormat.format("yyyy", myDate);
+                int setm = Integer.parseInt(month);
+                int setday = Integer.parseInt(day);
+                int sety =Integer.parseInt(year);
+
                 Toast.makeText(getApplicationContext(), day + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
 
-                calendar.setVisibility(View.INVISIBLE);
+                //calendar.setVisibility(View.INVISIBLE);
                 //    ll.setVisibility(View.VISIBLE);
                 long date1 = calendar.getDate();
                 Date d2 = new Date(date1);
-                String cMonth = (String) android.text.format.DateFormat.format("MM", d2);
-                String cyear = (String) android.text.format.DateFormat.format("yyyy", d2);
-                String cday = (String) android.text.format.DateFormat.format("dd", d2);
+                String cMonth = (String) android.text.format.DateFormat.format("MM", myDate);
+                String cyear = (String) android.text.format.DateFormat.format("yyyy", myDate);
+                String cday = (String) android.text.format.DateFormat.format("dd", myDate);
 
                 String[] projection = {CalendarContract.Events._ID,
                         CalendarContract.Events.TITLE,
@@ -229,10 +260,10 @@ public class CalEvent extends ActionBarActivity {
                         }
                     });
                 }
-             }
+            // }
 
 
-        });
+        //});
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

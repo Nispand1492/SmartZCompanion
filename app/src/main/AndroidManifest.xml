@@ -7,7 +7,8 @@
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -41,8 +42,18 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Add_PhoneCallReminder"
+            android:label="@string/title_activity_add__phone_call_reminder">
+            <intent-filter>
+                <action android:name="android.Add_PhoneCallReminder" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".WifiMenu"
-            android:label="@string/title_activity_second"></activity>
+            android:label="@string/title_activity_second"/>
 
         <!-- Receive Wi-Fi connection state changes -->
         <receiver
@@ -56,13 +67,13 @@
 
         <activity
             android:name=".phonecallbased"
-            android:label="@string/title_activity_phonecallbased"></activity>
+            android:label="@string/title_activity_phonecallbased"/>
         <activity
             android:name=".SetWifiReminder"
-            android:label="@string/title_activity_set_reminder"></activity>
+            android:label="@string/title_activity_set_reminder"/>
         <activity
             android:name=".NotificationView"
-            android:label="@string/title_activity_notification_view"></activity>
+            android:label="@string/title_activity_notification_view"/>
 
         <receiver
             android:name=".PhoneCallReceiver"
@@ -75,22 +86,19 @@
 
         <activity
             android:name=".DisplayWifiReminders"
-            android:label="@string/title_activity_display_wifi_reminders"></activity>
+            android:label="@string/title_activity_display_wifi_reminders"/>
         <activity
             android:name=".EditWifiReminder"
-            android:label="@string/title_activity_edit_wifi_reminder"></activity>
-        <activity
-            android:name=".Add_PhoneCallReminder"
-            android:label="@string/title_activity_add__phone_call_reminder"></activity>
+            android:label="@string/title_activity_edit_wifi_reminder"/>
         <activity
             android:name=".Edit_phonecallbased"
-            android:label="@string/title_activity_edit_phonecallbased"></activity>
+            android:label="@string/title_activity_edit_phonecallbased"/>
         <activity
             android:name=".EditEventPhoneCallBased"
-            android:label="@string/title_activity_edit_event_phone_call_based"></activity>
+            android:label="@string/title_activity_edit_event_phone_call_based"/>
         <activity
             android:name=".DeletePhoneEvent"
-            android:label="@string/title_activity_delete_phone_event"></activity>
+            android:label="@string/title_activity_delete_phone_event"/>
     </application>
 
 </manifest>

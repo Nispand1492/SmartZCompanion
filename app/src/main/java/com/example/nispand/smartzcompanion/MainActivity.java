@@ -15,13 +15,13 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Button button1, wifibutton, phonecallbased;
+        Button cal, wifibutton, phonecallbased;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        button1 = (Button) findViewById(R.id.button);
-        wifibutton = (Button) findViewById(R.id.button2);
-        phonecallbased = (Button) findViewById(R.id.button3);
-        button1.setOnClickListener(new OnClickListener() {
+        cal = (Button) findViewById(R.id.Cal);
+        wifibutton = (Button) findViewById(R.id.wifi);
+        phonecallbased = (Button) findViewById(R.id.phonbased);
+        cal.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent("android.CalEvent");
@@ -41,7 +41,7 @@ public class MainActivity extends ActionBarActivity {
         phonecallbased.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent k = new Intent("android.phonecallbased");
+                Intent k = new Intent(MainActivity.this,Add_PhoneCallReminder.class);
                 startActivity(k);
             }
         });
