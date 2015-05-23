@@ -83,17 +83,17 @@ public class Add_PhoneCallReminder extends ActionBarActivity implements AdapterV
                     Toast.makeText(getBaseContext(), NameSel + " : " + toNumberValue,
                             Toast.LENGTH_LONG).show();
                 }
-        SQLiteDatabase db = openOrCreateDatabase("SCDB",MODE_PRIVATE,null);
+        SQLiteDatabase db = openOrCreateDatabase("SCPD",MODE_PRIVATE,null);
 
 
-        db.execSQL("CREATE TABLE IF NOT EXISTS SCPDB (EventID varchar(60),Eventnote varchar(600),Contactname varchar(50),ReminderSet BOOLEAN,ContactNumber varchar(20));");
+        db.execSQL("CREATE TABLE IF NOT EXISTS SCPD (EventID varchar(60),Eventnote varchar(600),Contactname varchar(50),ReminderSet BOOLEAN,ContactNumber varchar(20));");
         SimpleDateFormat fdate = new SimpleDateFormat("HHmmssSSS");
         SimpleDateFormat fcdate =new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z");
         java.util.Date date= new java.util.Date();
         String sEventID = fdate.format(date);
 
         String sEventDate =fcdate.format(date);
-        String sIquery = "Insert Into SCDB VALUES('"+sEventID+"', '"+message+"', '"+NameSel+"', '"+sEventDate+"',1,'"+ToNumber+"');";
+        String sIquery = "Insert Into SCPD VALUES('"+sEventID+"', '"+message+"', '"+NameSel+"',1,'"+ToNumber+"');";
         db.execSQL(sIquery);
         db.close();
         setDisplay("REMINDER IS SET!!");
