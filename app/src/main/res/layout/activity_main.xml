@@ -43,7 +43,7 @@
         android:textSize="20dp"
         android:singleLine="true"
         style="@style/AppTheme"
-        android:drawableLeft="@android:drawable/ic_menu_call"
+        android:drawableLeft="@android:drawable/ic_menu_month"
         android:focusableInTouchMode="false" />
 
     <Button

@@ -219,14 +219,7 @@ public class Add_PhoneCallReminder extends ActionBarActivity implements AdapterV
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-        // Get Array index value for selected name
+    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
         int i = nameValueArr.indexOf(""+arg0.getItemAtPosition(arg2));
         if (i >= 0) {
 
@@ -246,6 +239,13 @@ public class Add_PhoneCallReminder extends ActionBarActivity implements AdapterV
                     "Position:"+arg2+" Name:"+arg0.getItemAtPosition(arg2)+" Number:"+toNumberValue);
 
         }
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+        // Get Array index value for selected name
+
     }
 
     @Override
