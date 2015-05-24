@@ -50,7 +50,6 @@ public class PhoneCallReceiver extends BroadcastReceiver {
                 String sSelectQ="Select * from SCPD where ReminderSet = 1;";
                 Cursor c= db.rawQuery(sSelectQ,null);
                 String eventnote;
-
                 String smobnum = incomingNumber;
                 smobnum=smobnum.replaceAll("[^0-9.]", "");
 
