@@ -1,13 +1,16 @@
 package com.example.nispand.smartzcompanion;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 public class PhoneCallReceiver extends BroadcastReceiver {
@@ -46,12 +49,12 @@ public class PhoneCallReceiver extends BroadcastReceiver {
 
             Log.d("MyPhoneListener",state+"   incoming no:"+incomingNumber +"State:" +state);
 
-            if (state == 2) {
+            if (state == 2 || state==1) {
                 String sSelectQ="Select * from SCPD where ReminderSet = 1;";
                 Cursor c= db.rawQuery(sSelectQ,null);
                 String eventnote;
                 String smobnum = incomingNumber;
-                smobnum=smobnum.replaceAll("[^0-9.]", "");
+                smobnum=smobnum.replaceAll("[^0-9.]","");
 
                 if(c!=null && c.getCount() > 0) {
 
@@ -66,32 +69,45 @@ public class PhoneCallReceiver extends BroadcastReceiver {
 
                         if(smobnum.equals(sContactNum))
                         {
-                            for (int i = 0; i < 2; i++) {
+                            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 
-                                    Toast toast = Toast.makeText(context, eventnote, Toast.LENGTH_LONG);
-                                    toast.show();
 
-                            }
+                            // set title
+                            alertDialogBuilder.setTitle("Call Based Reminder");
+
+                            // set dialog message
+                            alertDialogBuilder
+                                    .setMessage(eventnote)
+                                    .setCancelable(false)
+                                    .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog,int id) {
+                                            // if this button is clicked, close
+                                            // current activity
+
+                                            System.exit(0);                                        }
+                                    })
+                                    .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog,int id) {
+                                            // if this button is clicked, just close
+                                            // the dialog box and do nothing
+                                            dialog.cancel();
+                                        }
+                                    });
+                            alertDialogBuilder.setInverseBackgroundForced(true);
+                            // create alert dialog
+                            AlertDialog alertDialog = alertDialogBuilder.create();
+
+                            // show it
+                            alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+                            alertDialog.setInverseBackgroundForced(true);
+                            alertDialog.show();
                             bFinished = false;
                         }
 
                     }while(c.moveToNext()&&bFinished);
-
+                    db.close();
 
                 }
-
-
-//                String msg = "Mobile Number : " + smobnum;
-//                int duration = Toast.LENGTH_LONG;
-//
-//                if (msg.matches(".*\\d.*")){
-//                   // for (int i = 0; i < 2; i++) {
-//                        if (msg.matches(".*\\d.*")) {
-//                            Toast toast = Toast.makeText(context, msg, duration);
-//                            toast.show();
-//                        }
-//                   // }
-//                }
             }
         }
     }
